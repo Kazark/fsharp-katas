@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Anagrams", "Anagrams\Anagrams.fsproj", "{F11FA3EA-2F7B-419D-BED6-C4D288EEB42C}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Anagrams.Specs.Unit", "Anagrams.Specs.Unit\Anagrams.Specs.Unit.fsproj", "{C09CB115-1942-4DC8-A56B-700A09CE5E6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F11FA3EA-2F7B-419D-BED6-C4D288EEB42C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F11FA3EA-2F7B-419D-BED6-C4D288EEB42C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F11FA3EA-2F7B-419D-BED6-C4D288EEB42C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C09CB115-1942-4DC8-A56B-700A09CE5E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C09CB115-1942-4DC8-A56B-700A09CE5E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C09CB115-1942-4DC8-A56B-700A09CE5E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C09CB115-1942-4DC8-A56B-700A09CE5E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
