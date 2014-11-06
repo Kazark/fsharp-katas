@@ -1,11 +1,11 @@
 ﻿namespace Anagrams.Specs.Unit
 open FSpec.Dsl
 open FSpec.Matchers
-open Anagrams.Word
 
-module AnagramsUnitSpecs =
+module WordSpecs =
+    open Anagrams.Word
     let specs =
-        describe "Anagrams module" [
+        describe "Word module" [
             describe "Two words of different lengths" [
                 it "should not be anagrams of one another" <| fun _ ->
                     "aaa" |> isAnagramOf "aa" |> should (equal false)
@@ -17,6 +17,20 @@ module AnagramsUnitSpecs =
             describe "'foo' and 'bar'" [
                 it "should be anagrams of one another" <| fun _ ->
                     "foo" |> isAnagramOf "bar" |> should (equal false)
+            ]
+        ]
+
+module WordListSpecs =
+    open Anagrams
+    let specs =
+        describe "WordList module" [
+            describe "Finding the anagrams in a word list" [
+                context "of just one word" [
+                    it "should output just one word" <| fun _ ->
+                        WordList.findAnagrams [ "alpha" ]
+                        |> Seq.length
+                        |> should (equal 0)
+                ]
             ]
         ]
 
