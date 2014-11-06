@@ -1,4 +1,6 @@
 ﻿namespace Anagrams
+open System
 module Word =
     let isAnagramOf (word1:string) (word2:string) =
-        word1.Length = word2.Length
+        let sortString (s:string) = Seq.sort s |> String.Concat
+        sortString word1 = sortString word2

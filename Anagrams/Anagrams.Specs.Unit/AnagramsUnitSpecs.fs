@@ -14,6 +14,10 @@ module AnagramsUnitSpecs =
                 it "should be anagrams of one another" <| fun _ ->
                     "no" |> isAnagramOf "on" |> should (equal true)
             ]
+            describe "'foo' and 'bar'" [
+                it "should be anagrams of one another" <| fun _ ->
+                    "foo" |> isAnagramOf "bar" |> should (equal false)
+            ]
         ]
 
 [<MbUnit.Framework.TestFixtureAttribute>]
