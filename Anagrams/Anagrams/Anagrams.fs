@@ -15,5 +15,6 @@ module AnagramList =
     let format (anagrams : Map<string, list<string>>) =
         Map.toSeq anagrams
         |> Seq.map snd
-        |> Seq.map (fun strlist -> String.concat " " strlist)
+        |> Seq.map (fun strList -> Seq.sort strList |> String.concat " ")
+        |> Seq.sort
         |> String.concat "\n"

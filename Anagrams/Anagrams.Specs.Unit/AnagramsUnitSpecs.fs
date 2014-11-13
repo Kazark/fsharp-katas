@@ -27,7 +27,19 @@ module AnagramListSpecs =
                     |> AnagramList.add "dog"
                     |> AnagramList.add "god"
                     |> AnagramList.format
-                    |> should (equal "god dog")
+                    |> should (equal "dog god")
+            ]
+            context "when I add a variety of words, some of which are anagrams of each other" [
+                it "should be able to output them in a manner that reflects this fact" <| fun _ ->
+                    AnagramList.empty
+                    |> AnagramList.add "bar"
+                    |> AnagramList.add "dog"
+                    |> AnagramList.add "foo"
+                    |> AnagramList.add "god"
+                    |> AnagramList.add "no"
+                    |> AnagramList.add "on"
+                    |> AnagramList.format
+                    |> should (equal "bar\ndog god\nfoo\nno on")
             ]
         ]
 
