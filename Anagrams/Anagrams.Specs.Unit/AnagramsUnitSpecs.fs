@@ -14,12 +14,20 @@ module AnagramListSpecs =
                     |> should (equal "foo")
             ]
             context "when I add 'foo' and 'bar'" [
-                it "should show them as anagrams" <| fun _ ->
+                it "should show that they are not anagrams of each other" <| fun _ ->
                     AnagramList.empty
                     |> AnagramList.add "foo"
                     |> AnagramList.add "bar"
                     |> AnagramList.format
                     |> should (equal "bar\nfoo")
+            ]
+            context "when I add 'dog' and 'god'" [
+                it "should show them as anagrams" <| fun _ ->
+                    AnagramList.empty
+                    |> AnagramList.add "dog"
+                    |> AnagramList.add "god"
+                    |> AnagramList.format
+                    |> should (equal "god dog")
             ]
         ]
 
