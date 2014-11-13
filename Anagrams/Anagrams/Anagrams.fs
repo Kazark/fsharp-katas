@@ -2,19 +2,25 @@
 open System
 
 module AnagramList = 
-    let empty =
-        Map.empty<string, list<string>>
-    let add (word : string) (anagrams : Map<string, list<string>>) =
+    type AnagramsMap = Map<string, list<string>>
+
+    let empty = Map.empty<string, list<string>>
+
+    let add (word : string) (anagramsMap : AnagramsMap) =
         let sortedWord = Seq.sort word |> String.Concat
         let anagramsForWord =
-            if anagrams.ContainsKey sortedWord then
-                List.Cons(word, anagrams.Item sortedWord)
+            if anagramsMap.ContainsKey sortedWord then
+                List.Cons(word, anagramsMap.Item sortedWord)
             else
                 [word]
-        anagrams.Add(sortedWord, anagramsForWord)
-    let format (anagrams : Map<string, list<string>>) =
-        Map.toSeq anagrams
-        |> Seq.map snd
-        |> Seq.map (fun strList -> Seq.sort strList |> String.concat " ")
+        anagramsMap.Add(sortedWord, anagramsForWord)
+
+    let format (anagramsMap : AnagramsMap) =
+        let listsOfAnagrams =
+            Map.toSeq anagramsMap |> Seq.map snd
+        let formatLine anagrams = 
+            Seq.sort anagrams |> String.concat " "
+        listsOfAnagrams 
+        |> Seq.map formatLine
         |> Seq.sort
         |> String.concat "\n"
