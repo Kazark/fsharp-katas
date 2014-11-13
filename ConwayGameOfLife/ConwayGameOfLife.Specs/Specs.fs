@@ -12,3 +12,6 @@ type ``Given a cell was living in the previous generation`` () =
     [<Test>]
     member x.``and had two living neighbors, it should have lived on`` () =
         nextStateOf LivingCell 2 |> should equal LivingCell
+    [<Test>]
+    member x.``and had three living neighbors, it should have lived on`` () =
+        nextStateOf LivingCell 3 |> should equal LivingCell

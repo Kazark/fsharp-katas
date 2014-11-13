@@ -11,4 +11,5 @@ type Cell =
 let nextStateOf _ communitySize =
     match communitySize with
     | 2 -> LivingCell
+    | 3 -> LivingCell
     | _ -> DeadCell
