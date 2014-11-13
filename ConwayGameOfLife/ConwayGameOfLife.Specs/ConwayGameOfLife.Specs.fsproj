@@ -22,6 +22,11 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <DocumentationFile>bin\Debug\ConwayGameOfLife.Specs.XML</DocumentationFile>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files (x86)\NUnit 2.6.3\bin\nunit.exe</StartProgram>
+    <StartWorkingDirectory>
+    </StartWorkingDirectory>
+    <StartArguments>ConwayGameOfLife.Specs.dll</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,10 +54,11 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
-    <Compile Include="Specs.fs" />
+    <Compile Include="LifeAndDeathSpecs.fs" />
     <None Include="Script.fsx" />
     <Content Include="packages.config" />
     <Content Include="app.config" />
+    <Compile Include="GameSpecs.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsUnit.NUnit">
