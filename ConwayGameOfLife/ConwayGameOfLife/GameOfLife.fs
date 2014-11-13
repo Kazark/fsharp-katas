@@ -8,4 +8,7 @@ type Cell =
         | DeadCell -> "Dead"
         | LivingCell -> "Alive"
 
-let nextStateOf _ _ = DeadCell
+let nextStateOf _ communitySize =
+    match communitySize with
+    | 2 -> LivingCell
+    | _ -> DeadCell
