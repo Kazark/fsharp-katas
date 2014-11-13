@@ -5,15 +5,21 @@ open FSpec.Matchers
 module AnagramListSpecs =
     open Anagrams;
     let specs =
-        describe "Given an anagram list" [
-            context "which is empty" [
-                context "when I add an element" [
-                    it "should contain that element" <| fun _ ->
-                        AnagramList.empty
-                        |> AnagramList.add "foo"
-                        |> AnagramList.format
-                        |> should (equal "foo\n")
-                ]
+        describe "Given an empty anagram list" [
+            context "when I add 'foo'" [
+                it "should contain that element" <| fun _ ->
+                    AnagramList.empty
+                    |> AnagramList.add "foo"
+                    |> AnagramList.format
+                    |> should (equal "foo")
+            ]
+            context "when I add 'foo' and 'bar'" [
+                it "should show them as anagrams" <| fun _ ->
+                    AnagramList.empty
+                    |> AnagramList.add "foo"
+                    |> AnagramList.add "bar"
+                    |> AnagramList.format
+                    |> should (equal "bar\nfoo")
             ]
         ]
 
