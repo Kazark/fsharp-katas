@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anagrams.fs" />
+    <Compile Include="IO.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
