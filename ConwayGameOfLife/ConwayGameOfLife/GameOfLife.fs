@@ -14,12 +14,25 @@ let nextStateOf cell communitySize =
     | _, 3 -> LivingCell
     | _, _ -> DeadCell
 
-module Game =
+module Board =
     type Position = ColumnAndRow of int * int
-    type Board = Map<Position, Cell>
+    type Mapped = Map<Position, Cell>
+    type Nested = Cell seq seq
 
-    let play gameBoard =
-        Seq.initInfinite (fun _ -> gameBoard)
+    let nestedToMapped nestedSeqs =
+        let toCellAtPosition rowNumber row =
+            let positionCell columnNumber cell =
+                ColumnAndRow(columnNumber, rowNumber), cell
+            Seq.mapi positionCell row
+        Seq.mapi toCellAtPosition nestedSeqs
+        |> Seq.concat
+        |> Map.ofSeq
+
+    let shiftUp nested = Seq.skip 1 nested
+    let shiftLeft nested =
+        Seq.map (fun row -> Seq.skip 1 row) nested
+    let shiftRight nested =
+        Seq.map (fun row -> DeadCell :: row) nested
 
     let formatGeneration _ =
         "O.O..\n" +
@@ -28,6 +41,21 @@ module Game =
         ".....\n" +
         ".....\n"
 
+module Game =
+    let nextGeneration gameBoard =
+        gameBoard
+    let play gameBoard =
+        Seq.initInfinite (fun _ -> gameBoard)
+
 module Plaintext =
-    let parse _ =
-        Map.empty<Game.Position, Cell>
+    let parseCell cell =
+        match cell with
+        | 'O' -> LivingCell
+        | _ -> DeadCell
+
+    let parseRow row =
+        Seq.map parseCell row
+
+    let parse (plaintext : string) =
+        plaintext.Split '\n'
+        |> Seq.map parseRow
