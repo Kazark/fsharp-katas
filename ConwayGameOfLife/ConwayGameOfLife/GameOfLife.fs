@@ -14,6 +14,21 @@ let nextStateOf cell communitySize =
     | _, 3 -> LivingCell
     | _, _ -> DeadCell
 
+module Grid =
+    type LinkedList2D<'T> =
+        | Terminator
+        | Node of value:'T * right:LinkedList2D<'T>
+
+    let empty = Terminator
+    let rec ofOnlyOneRow row =
+        match row with
+        | [] -> empty
+        | value :: rest -> Node(value, ofOnlyOneRow rest)
+    let rec topAsList node =
+        match node with
+        | Terminator -> []
+        | Node(value, right) -> value :: topAsList right
+
 module Board =
     type Position = ColumnAndRow of int * int
     type Mapped = Map<Position, Cell>
