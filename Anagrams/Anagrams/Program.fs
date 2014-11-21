@@ -11,5 +11,7 @@ module Main =
 
     [<EntryPoint>]
     let main _ = 
-        linesFromStdin() |> AnagramList.findAnagrams |> Console.Write
+        let anagrams = linesFromStdin() |> AnagramList.findAnagrams
+        for line in anagrams do
+            Console.WriteLine line
         0

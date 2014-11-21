@@ -11,6 +11,7 @@ let specs =
                 AnagramList.empty
                 |> AnagramList.add "foo"
                 |> AnagramList.format
+                |> String.concat "\n"
                 |> should (equal "foo")
         ]
         context "when I add 'foo' and 'bar'" [
@@ -19,6 +20,7 @@ let specs =
                 |> AnagramList.add "foo"
                 |> AnagramList.add "bar"
                 |> AnagramList.format
+                |> String.concat "\n"
                 |> should (equal "bar\nfoo")
         ]
         context "when I add 'dog' and 'god'" [
@@ -27,6 +29,7 @@ let specs =
                 |> AnagramList.add "dog"
                 |> AnagramList.add "god"
                 |> AnagramList.format
+                |> String.concat "\n"
                 |> should (equal "dog god")
         ]
         context "when I add a variety of words, some of which are anagrams of each other" [
@@ -39,6 +42,7 @@ let specs =
                 |> AnagramList.add "no"
                 |> AnagramList.add "on"
                 |> AnagramList.format
+                |> String.concat "\n"
                 |> should (equal "bar\ndog god\nfoo\nno on")
         ]
         context "when I stream in lines, each of which has a word on it" [
@@ -46,6 +50,7 @@ let specs =
                 let input = "boaster\nboaters\nborates\nenlist\ninlets\nkinship\nlisten\npinkish"
                 input.Split [|'\n'|]
                 |> AnagramList.findAnagrams
+                |> String.concat "\n"
                 |> should (equal "boaster boaters borates\nenlist inlets listen\nkinship pinkish")
         ]
     ]

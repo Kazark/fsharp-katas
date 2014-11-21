@@ -25,7 +25,6 @@ module AnagramList =
             Seq.sort anagrams |> String.concat " "
         listsOfAnagrams 
         |> Seq.map formatLine
-        |> String.concat "\n"
 
     let findAnagrams lines =
         lines
