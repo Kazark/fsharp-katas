@@ -37,3 +37,10 @@ type ``Spec for a two-dimensional grid with is singly-linked in each direction``
         |> Grid.pushDown [true, false]
         |> Grid.topAsList
         |> should equal [true, false]
+
+    [<Test>]
+    member x.``When a list is pushed down onto a nonempty grid, it is pushed as the top row``() =
+        Grid.ofOnlyOneRow [1, 2, 3]
+        |> Grid.pushDown [4, 5, 6]
+        |> Grid.topAsList
+        |> should equal [4, 5, 6]

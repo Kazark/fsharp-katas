@@ -35,7 +35,7 @@ module Grid =
         match row, grid with
         | [], node -> node
         | row, Terminator -> ofOnlyOneRow row
-        | row, node -> node
+        | row, node -> ofOnlyOneRow row
 
 module Board =
     type Position = ColumnAndRow of int * int
