@@ -15,6 +15,9 @@ module AnagramList =
                 [word]
         anagramsMap.Add(sortedWord, anagramsForWord)
 
+    let addTo (anagramsMap : AnagramsMap) (word : string) =
+        add word anagramsMap 
+
     let format (anagramsMap : AnagramsMap) =
         let listsOfAnagrams =
             Map.toSeq anagramsMap |> Seq.map snd
@@ -22,5 +25,9 @@ module AnagramList =
             Seq.sort anagrams |> String.concat " "
         listsOfAnagrams 
         |> Seq.map formatLine
-        |> Seq.sort
         |> String.concat "\n"
+
+    let findAnagrams lines =
+        lines
+        |> Seq.fold addTo empty
+        |> format

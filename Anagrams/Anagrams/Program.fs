@@ -1,6 +1,15 @@
 ﻿namespace Anagrams
+open System
 module Main =
+    let linesFromStdin() =
+        Seq.unfold(fun line ->
+            if line = null then
+                None
+            else
+                Some(line,Console.ReadLine())
+        )(Console.ReadLine())
+
     [<EntryPoint>]
-    let main argv = 
-        printfn "%A" argv
-        0 // return an integer exit code
+    let main _ = 
+        linesFromStdin() |> AnagramList.findAnagrams |> Console.Write
+        0
