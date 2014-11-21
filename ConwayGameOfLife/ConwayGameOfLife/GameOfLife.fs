@@ -20,14 +20,22 @@ module Grid =
         | Node of value:'T * right:LinkedList2D<'T>
 
     let empty = Terminator
+
     let rec ofOnlyOneRow row =
         match row with
         | [] -> empty
         | value :: rest -> Node(value, ofOnlyOneRow rest)
+
     let rec topAsList node =
         match node with
         | Terminator -> []
         | Node(value, right) -> value :: topAsList right
+
+    let pushDown row grid =
+        match row, grid with
+        | [], node -> node
+        | row, Terminator -> ofOnlyOneRow row
+        | row, node -> node
 
 module Board =
     type Position = ColumnAndRow of int * int
