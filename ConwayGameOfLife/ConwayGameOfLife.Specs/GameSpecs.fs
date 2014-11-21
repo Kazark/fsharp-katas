@@ -44,17 +44,17 @@ type ``Given a simple glider set to move down and to the right, when I start a g
     let gliderMoving =
         Plaintext.parse glider0
         |> Game.play
-        |> Seq.map Game.formatGeneration
+        |> Seq.map Board.formatGeneration
         |> Seq.take 5
         |> Seq.toList
 
     [<Test>]
     member x.``then the first state is the initial state`` () =
         gliderMoving.[0] |> should equal glider0
-    (*[<Test>]
+    [<Test>]
     member x.``and in the second state the glider has transformed but not moved`` () =
         gliderMoving.[1] |> should equal glider1
-    [<Test>]
+    (*[<Test>]
     member x.``and in the third state the glider has moved right`` () =
         gliderMoving.[2] |> should equal glider2
     [<Test>]

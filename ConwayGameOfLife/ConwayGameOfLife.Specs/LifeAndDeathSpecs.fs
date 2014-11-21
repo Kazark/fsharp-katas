@@ -1,4 +1,4 @@
-﻿namespace ConwayGameOfLife.Specs
+﻿module LifeAndDeathSpecs
 
 open NUnit.Framework
 open FsUnit
