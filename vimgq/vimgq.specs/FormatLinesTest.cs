@@ -35,6 +35,14 @@ namespace vimgq.specs
             Assert.Equal("Oh what a rogue and peasant slave\nam I", formatted);
         }
 
+        [Fact]
+        public void WrapWithIndent()
+        {
+            const string Unformatted = "    foo bar";
+            var formatted = FormatLines.OneLine(8, Unformatted);
+            Assert.Equal("    foo\n    bar", formatted);
+        }
+
         [Fact(Skip="This test jumped two steps ahead; I need an intermediate one")]
         public void WithLengthMoreThanTwiceAsGreatAsTextWidthWrapsOntoThreeLines()
         {
