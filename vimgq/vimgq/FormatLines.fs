@@ -1,17 +1,21 @@
 ﻿module FormatLines
 open System
 
-let rec readIndent (indent : string) (text : string) =
+let rec readIndent (text : string) =
     match text.[0] with
-    | ' ' -> readIndent (sprintf "%s%c" indent text.[0]) (text.[1..])
-    | _ -> indent
+    | ' ' -> " " + readIndent (text.[1..])
+    | _ -> ""
 
 let OneLine textwidth (textToFormat : string) =
+    let headLineAndRest (textToFormat : string) =
+        let indent = readIndent textToFormat
+        textToFormat.[..textwidth-1].TrimEnd(), (indent + textToFormat.[textwidth..].TrimStart())
+
     let rec oneLineAsLines (textToFormat : string) =
         if textToFormat.Length > textwidth
         then
-            let indent = readIndent "" textToFormat
-            textToFormat.[..textwidth-1].TrimEnd() :: oneLineAsLines (indent + textToFormat.[textwidth..].TrimStart())
+            let headLine, rest = headLineAndRest textToFormat
+            headLine :: oneLineAsLines rest
         else [textToFormat]
 
     oneLineAsLines textToFormat

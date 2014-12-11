@@ -35,7 +35,7 @@ namespace vimgq.specs
             Assert.Equal("Oh what a rogue and peasant slave\nam I", formatted);
         }
 
-        [Fact(Skip="This test jumped two steps ahead; I need an intermediate one")]
+        [Fact]
         public void WrapDoesNotSplitWords()
         {
             const string Unformatted = "Oh what a rogue and peasant slave am I";
