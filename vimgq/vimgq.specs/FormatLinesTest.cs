@@ -7,24 +7,32 @@ namespace vimgq.specs
         [Fact]
         public void FormatOneEmptyLineDoesNothing()
         {
-            var formatted = FormatLines.oneLine(80, string.Empty);
+            var formatted = FormatLines.OneLine(80, string.Empty);
             Assert.Equal(string.Empty, formatted);
         }
 
         [Fact]
         public void FormatOneLineWithLengthEqualToTextWidthDoesNothing()
         {
-            const string Unformatted = "Oh, what a rogue and peasent slave am I!";
-            var formatted = FormatLines.oneLine(40, Unformatted);
+            const string Unformatted = "Oh, what a rogue and peasant slave am I!";
+            var formatted = FormatLines.OneLine(40, Unformatted);
             Assert.Equal(Unformatted, formatted);
         }
 
         [Fact]
         public void FormatOneLineWithLengthOneGreaterThanTextWidthWraps()
         {
-            const string Unformatted = "Oh what a rogue and peasent slave am I";
-            var formatted = FormatLines.oneLine(37, Unformatted);
-            Assert.Equal("Oh what a rogue and peasent slave am\nI", formatted);
+            const string Unformatted = "Oh what a rogue and peasant slave am I";
+            var formatted = FormatLines.OneLine(37, Unformatted);
+            Assert.Equal("Oh what a rogue and peasant slave am\nI", formatted);
+        }
+
+        [Fact(Skip="This test jumped two steps ahead; I need an intermediate one")]
+        public void FormatOneLineWithLengthMoreThanTwiceAsGreatAsTextWidthWrapsOntoThreeLines()
+        {
+            const string Unformatted = "Oh, what a rogue and peasant slave am I!";
+            var formatted = FormatLines.OneLine(19, Unformatted);
+            Assert.Equal("Oh, what a rogue\nand peasant slave\nam I!", formatted);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿module FormatLines
 
-let oneLine textwidth (textToFormat : string) =
+let OneLine textwidth (textToFormat : string) =
     if textToFormat.Length > textwidth
-    then "Oh what a rogue and peasent slave am\nI"
+    then "Oh what a rogue and peasant slave am\nI"
     else textToFormat
