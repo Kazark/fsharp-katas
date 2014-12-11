@@ -1,3 +1,3 @@
 ﻿module FormatLines
 
-let oneLine x = x
+let oneLine _ x = x
