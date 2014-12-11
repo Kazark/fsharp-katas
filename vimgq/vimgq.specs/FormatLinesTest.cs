@@ -35,19 +35,27 @@ namespace vimgq.specs
             Assert.Equal("Oh what a rogue and peasant slave\nam I", formatted);
         }
 
+        [Fact(Skip="This test jumped two steps ahead; I need an intermediate one")]
+        public void WrapDoesNotSplitWords()
+        {
+            const string Unformatted = "Oh what a rogue and peasant slave am I";
+            var formatted = FormatLines.OneLine(35, Unformatted);
+            Assert.Equal("Oh what a rogue and peasant slave\nam I", formatted);
+        }
+
         [Fact]
-        public void WrapWithIndent()
+        public void WrapWithIndentBySpaces()
         {
             const string Unformatted = "    foo bar";
             var formatted = FormatLines.OneLine(8, Unformatted);
             Assert.Equal("    foo\n    bar", formatted);
         }
 
-        [Fact(Skip="This test jumped two steps ahead; I need an intermediate one")]
+        [Fact]
         public void WithLengthMoreThanTwiceAsGreatAsTextWidthWrapsOntoThreeLines()
         {
             const string Unformatted = "Oh, what a rogue and peasant slave am I!";
-            var formatted = FormatLines.OneLine(19, Unformatted);
+            var formatted = FormatLines.OneLine(17, Unformatted);
             Assert.Equal("Oh, what a rogue\nand peasant slave\nam I!", formatted);
         }
     }
