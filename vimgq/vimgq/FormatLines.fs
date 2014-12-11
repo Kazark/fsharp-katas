@@ -7,6 +7,15 @@ let rec readIndent (text : string) =
     | _ -> ""
 
 let OneLine textwidth (textToFormat : string) =
+    let rec indexForLineSplit (characters : char list) =
+        let rec splitWordAt (characters : char list) index expectSpace =
+            match expectSpace, characters with
+            | _, [] -> index
+            | false, ' ' :: _ -> index
+            | true, ' ' :: textTail -> splitWordAt textTail (index + 1) expectSpace
+            | _, _ :: textTail -> splitWordAt textTail (index + 1) false
+        0 // TODO
+
     let headLineAndRest (textToFormat : string) =
         let indent = readIndent textToFormat
         textToFormat.[..textwidth-1].TrimEnd(), (indent + textToFormat.[textwidth..].TrimStart())
