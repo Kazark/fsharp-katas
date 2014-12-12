@@ -13,6 +13,11 @@ let OneLine textwidth (textToFormat : string) =
         | ' ' -> " " + readIndent (text.[1..])
         | _ -> ""
 
+    let rec readComments (text : string) =
+        match text.TrimStart().[..2] with
+        | "// " -> "// "
+        | _ -> ""
+
     let indexForLineSplit (characters : string) =
         let rec endOfNextWord (characters : char list) index expectSpace =
             match expectSpace, characters with
@@ -39,8 +44,9 @@ let OneLine textwidth (textToFormat : string) =
         | DoNotSplit -> textToFormat, ""
         | Index index ->
             let indent = readIndent textToFormat
+            let comments = readComments textToFormat
             let line, rest = splitLineAt textToFormat index
-            line, indent + rest
+            line, indent + comments + rest
 
     let rec splitIntoLines (textToFormat : string) =
         match headLineAndRest textToFormat with

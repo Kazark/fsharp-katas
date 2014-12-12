@@ -74,5 +74,13 @@ namespace vimgq.specs
             var formatted = FormatLines.OneLine(17, Unformatted);
             Assert.Equal("Oh, what a rogue\nand peasant slave\nam I!", formatted);
         }
+
+        [Fact]
+        public void WithComments()
+        {
+            const string Unformatted = "    // Here be dragons";
+            var formatted = FormatLines.OneLine(20, Unformatted);
+            Assert.Equal("    // Here be\n    // dragons", formatted);
+        }
     }
 }
