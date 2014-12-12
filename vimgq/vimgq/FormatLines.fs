@@ -14,10 +14,11 @@ let OneLine textwidth (textToFormat : string) =
         | _ -> ""
 
     let rec readComments (text : string) =
-        match List.ofSeq (text.TrimStart()) with
-        | '/' :: '/' :: ' ' :: _ -> "// "
-        | '/' :: '/' :: _ -> "//"
-        | _ -> ""
+        if text.StartsWith("// ") then "// "
+        elif text.StartsWith("//") then "//"
+        elif text.StartsWith("/*") then " * "
+        elif text.StartsWith(" * ") then " * "
+        else ""
 
     let indexForLineSplit (characters : string) =
         let rec endOfNextWord (characters : char list) index expectSpace =
@@ -45,7 +46,7 @@ let OneLine textwidth (textToFormat : string) =
         | DoNotSplit -> textToFormat, ""
         | Index index ->
             let indent = readIndent textToFormat
-            let comments = readComments textToFormat
+            let comments = readComments (textToFormat.TrimStart())
             let line, rest = splitLineAt textToFormat index
             line, indent + comments + rest
 

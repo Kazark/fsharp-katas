@@ -76,23 +76,15 @@ namespace vimgq.specs
         }
 
         [Fact]
-        public void WithComments()
+        public void WithBlockComments()
         {
-            const string Unformatted = "    // Here be dragons";
+            const string Unformatted = "    /* Here be dragons */";
             var formatted = FormatLines.OneLine(20, Unformatted);
-            Assert.Equal("    // Here be\n    // dragons", formatted);
+            Assert.Equal("    /* Here be\n     * dragons */", formatted);
         }
 
         [Fact]
-        public void WithCommentsNoSpace()
-        {
-            const string Unformatted = "    //Here be dragons";
-            var formatted = FormatLines.OneLine(20, Unformatted);
-            Assert.Equal("    //Here be\n    //dragons", formatted);
-        }
-
-        [Fact]
-        public void EdgeCase_CommentAlgorithmSafety()
+        public void EdgeCase_InlineCommentAlgorithmSafety()
         {
             const string Unformatted = "                    /";
             var formatted = FormatLines.OneLine(20, Unformatted);
