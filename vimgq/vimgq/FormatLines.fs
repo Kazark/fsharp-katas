@@ -7,18 +7,24 @@ let rec readIndent (text : string) =
     | _ -> ""
 
 let OneLine textwidth (textToFormat : string) =
-    let rec indexForLineSplit (characters : char list) =
-        let rec splitWordAt (characters : char list) index expectSpace =
+    let indexForLineSplit (characters : string) =
+        let rec endOfNextWord (characters : char list) index expectSpace =
             match expectSpace, characters with
             | _, [] -> index
             | false, ' ' :: _ -> index
-            | true, ' ' :: textTail -> splitWordAt textTail (index + 1) expectSpace
-            | _, _ :: textTail -> splitWordAt textTail (index + 1) false
-        0 // TODO
+            | true, ' ' :: textTail -> endOfNextWord textTail (index + 1) expectSpace
+            | _, _ :: textTail -> endOfNextWord textTail (index + 1) false
+        let rec endOfLine lastIndex (characters : string) =
+            let index = endOfNextWord (List.ofSeq characters) lastIndex true
+            if index > textwidth || index > textToFormat.Length
+            then lastIndex
+            else endOfLine index textToFormat.[index..]
+        endOfLine 0 textToFormat
 
     let headLineAndRest (textToFormat : string) =
         let indent = readIndent textToFormat
-        textToFormat.[..textwidth-1].TrimEnd(), (indent + textToFormat.[textwidth..].TrimStart())
+        let index = indexForLineSplit textToFormat
+        textToFormat.[..index].TrimEnd(), (indent + textToFormat.[index+1..].TrimStart())
 
     let rec oneLineAsLines (textToFormat : string) =
         if textToFormat.Length > textwidth
