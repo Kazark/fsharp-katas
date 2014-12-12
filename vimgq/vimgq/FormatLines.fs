@@ -14,8 +14,9 @@ let OneLine textwidth (textToFormat : string) =
         | _ -> ""
 
     let rec readComments (text : string) =
-        match text.TrimStart().[..2] with
-        | "// " -> "// "
+        match List.ofSeq (text.TrimStart()) with
+        | '/' :: '/' :: ' ' :: _ -> "// "
+        | '/' :: '/' :: _ -> "//"
         | _ -> ""
 
     let indexForLineSplit (characters : string) =
