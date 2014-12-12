@@ -52,6 +52,14 @@ namespace vimgq.specs
         }
 
         [Fact]
+        public void DoNotWrapOneWordLineWithExcessiveIndent()
+        {
+            const string Unformatted = "                                                                                toolong";
+            var formatted = FormatLines.OneLine(80, Unformatted);
+            Assert.Equal(Unformatted, formatted);
+        }
+
+        [Fact]
         public void WithLengthMoreThanTwiceAsGreatAsTextWidthWrapsOntoThreeLines()
         {
             const string Unformatted = "Oh, what a rogue and peasant slave am I!";
