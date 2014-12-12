@@ -60,6 +60,14 @@ namespace vimgq.specs
         }
 
         [Fact]
+        public void DoesNotBreakWordWhichIsLongerThanTextwidth()
+        {
+            const string Unformatted = "floccinaucinihilipilification";
+            var formatted = FormatLines.OneLine(20, Unformatted);
+            Assert.Equal(Unformatted, formatted);
+        }
+
+        [Fact]
         public void WithLengthMoreThanTwiceAsGreatAsTextWidthWrapsOntoThreeLines()
         {
             const string Unformatted = "Oh, what a rogue and peasant slave am I!";

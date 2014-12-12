@@ -1,6 +1,12 @@
 ﻿module FormatLines
 open System
 
+type SplitIndex = DoNotSplit | Index of int
+let toSplitIndex i =
+    match i with
+    | 0 -> DoNotSplit
+    | x -> Index x
+
 let OneLine textwidth (textToFormat : string) =
     let rec readIndent (text : string) =
         match text.[0] with
@@ -21,26 +27,25 @@ let OneLine textwidth (textToFormat : string) =
             then lastIndex
             else endOfLine index textToFormat.[index..]
 
-        endOfLine 0 textToFormat
+        if characters.Length > textwidth
+        then endOfLine 0 textToFormat |> toSplitIndex
+        else DoNotSplit
 
     let splitLineAt (line : string) index =
         line.[..index].TrimEnd(), line.[index+1..].TrimStart()
 
     let headLineAndRest (textToFormat : string) =
         match indexForLineSplit textToFormat with
-        | 0 -> textToFormat, ""
-        | index ->
+        | DoNotSplit -> textToFormat, ""
+        | Index index ->
             let indent = readIndent textToFormat
             let line, rest = splitLineAt textToFormat index
             line, indent + rest
 
     let rec splitIntoLines (textToFormat : string) =
-        if textToFormat.Length > textwidth
-        then
-            match headLineAndRest textToFormat with
-            | line, "" -> [line]
-            | headLine, rest -> headLine :: splitIntoLines rest
-        else [textToFormat]
+        match headLineAndRest textToFormat with
+        | line, "" -> [line]
+        | headLine, rest -> headLine :: splitIntoLines rest
 
     splitIntoLines textToFormat
     |> String.concat "\n"
